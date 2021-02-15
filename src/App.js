@@ -1,56 +1,43 @@
 import React, { useState } from "react";
 import { useInput } from "./useInput";
 
-const App = () => {
-    // const maxLen = (value) => value.length <= 10;
-    const maxLen = (value) => !value.includes("@");
-    const name = useInput("Mr.", maxLen);
+const content = [
+    {
+        tab: "Section 1",
+        content: "I'm the content of the Section 1",
+    },
+    {
+        tab: "Section 2",
+        content: "I'm the content of the Section 2",
+    },
+];
 
+const useTab = (initialTab, allTabs) => {
+    const [currentIndex, setCurrentIndex] = useState(initialTab);
+
+    if (!allTabs || !Array.isArray(allTabs)) {
+        return;
+    }
+
+    return {
+        currentItem: allTabs[currentIndex],
+        changeItem: setCurrentIndex,
+    };
+};
+
+const App = () => {
+    const { currentItem, changeItem } = useTab(0, content);
     return (
         <div className="App">
-            <h1>Hello</h1>
-            <input placeholder="Name" {...name} />
+            {content.map((section, index) => (
+                <button onClick={() => changeItem(index)}>{section.tab}</button>
+            ))}
+            <div>{currentItem.content}</div>
         </div>
     );
 };
 
 export default App;
-
-// class AppUgly extends React.Component {
-//   state = {
-//     item : 1
-//   }
-
-//   render() {
-//     return (
-//       <div className="App">
-//         <h1>Hello {this.state.item}</h1>
-//         <h2>Start editing to see some magic happen!</h2>
-//         <button onClick={this.incrementItem}>Increment</button>
-//         <button onClick={this.decrementItem}>Decrement</button>
-//       </div>
-//     );
-//   }
-
-//   incrementItem = () => {
-//     this.setState(state => {
-//       return{
-//         item: state.item + 1
-//       }
-//     })
-//   }
-
-//   decrementItem = () => {
-//     this.setState(state => {
-//       return{
-//         item: state.item - 1
-//       }
-//     })
-//   }
-
-// }
-
-// export default AppUgly;
 
 // /**
 //  * nomad_coder_react_movie_app ***
