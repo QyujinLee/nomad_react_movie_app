@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useClick } from "./useClick";
+import { usePreventLeave } from "./usePreventLeave";
 
 const App = () => {
-    const sayHello = () => console.log("say hello");
-    const title = useClick(sayHello);
+    const { enablePrevent, disablePrevent } = usePreventLeave();
     return (
         <div className="App">
-            <h1 ref={title}>Hi</h1>
+            <button onClick={enablePrevent}>enablePrevent</button>
+            <button onClick={disablePrevent}>disablePrevent</button>
         </div>
     );
 };
