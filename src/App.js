@@ -1,12 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useBeforeLeave } from "./useBeforeLeave";
+import { useFadeIn } from "./useFadeIn";
+import { useNetwork } from "./useNetwork";
 
 const App = () => {
-    const begForLife = () => console.log("pls don't leave");
-    useBeforeLeave(begForLife);
+    const fadeInH1 = useFadeIn(1, 2);
+    const fadeInP = useFadeIn(5, 10);
+    const handleNetworkChange = (online) => {
+        console.log(online ? "We just went online" : "We are offline");
+    };
+    const onLine = useNetwork(handleNetworkChange);
     return (
         <div className="App">
-            <h1>Hello World</h1>
+            <h1 {...fadeInH1}>FadeIn 1</h1>
+            <p {...fadeInP}>FadeIn 2</p>
+            <br />
+            <h1>{onLine ? "Online" : "Offline"}</h1>
         </div>
     );
 };
