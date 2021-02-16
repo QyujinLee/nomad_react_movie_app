@@ -1,21 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useInput } from "./useInput";
-import { useTab } from "./useTab";
+import React, { useState, useEffect } from "react";
+import { useTitle } from "./useTitle";
 
 const App = () => {
-    const sayHello = () => console.log("hello");
-    const [number, setNumber] = useState(0);
-    const [aNumber, setAnumber] = useState(0);
+    const titleUpdater = useTitle("Loading...");
 
-    useEffect(() => {
-        sayHello();
-    }, [number]);
+    setTimeout(() => titleUpdater("Home"), 3000);
 
     return (
         <div className="App">
             <div>Hi</div>
-            <button onClick={() => setNumber(number + 1)}>{number}</button>
-            <button onClick={() => setAnumber(aNumber + 1)}>{aNumber}</button>
         </div>
     );
 };
