@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import useAxios from "./useAxios";
+import useAxios from "./useAxios/useAxios";
 
 const App = () => {
     const { loading, data, refetch } = useAxios({
