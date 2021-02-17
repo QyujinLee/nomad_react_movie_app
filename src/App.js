@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNotification } from "./useNotification";
+import useAxios from "./useAxios";
 
 const App = () => {
-    const customOptions = {
-        body: "I love it",
-    };
-    const triggerNofif = useNotification("Can I Steel It ?", customOptions);
+    const { loading, data, refetch } = useAxios({
+        url: "https://yts.am/api/v2/list_movies.json",
+    });
+
     return (
         <div className="App" style={{ height: "1000vh" }}>
-            <button onClick={triggerNofif}>hello</button>
+            <h1>{data && data.status}</h1>
+            <h2>{loading && "Loading"}</h2>
+            <button onClick={refetch}>Refetch</button>
         </div>
     );
 };
